@@ -1,3 +1,5 @@
+# script to bulk download the rsd datasets with additional filter options 
+
 from google.oauth2 import service_account
 from google.cloud import bigquery, storage
 import os
