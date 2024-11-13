@@ -4,14 +4,14 @@ import os
 from tqdm import tqdm
 
 # Set up credentials
-credentials = service_account.Credentials.from_service_account_file('/home/mmichael/Datasets/calcium-firefly-422713-b9-feee775cbaec.json')
+credentials = service_account.Credentials.from_service_account_file('/path/to/key.json')
 bigquery_client = bigquery.Client(credentials=credentials)
 storage_client = storage.Client(credentials=credentials)
 
 # Set up the query
 query = """
 SELECT source_url, total_size
-FROM `calcium-firefly-422713-b9.s2l2a.2016-2023`
+FROM `bucket_name.folder_path.table_name`
 WHERE EXTRACT(YEAR FROM sensing_time) = 2017
 """ 
 
@@ -20,7 +20,7 @@ query_job = bigquery_client.query(query)
 results = query_job.result()
 
 # Define a local directory to store the downloaded files
-output_folder = '/home/mmichael/Datasets/S2_2017'
+output_folder = '/path/to/output/folder'
 
 # Ensure the output directory exists
 os.makedirs(output_folder, exist_ok=True)
